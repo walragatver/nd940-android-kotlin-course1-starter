@@ -37,6 +37,11 @@ class WelcomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController()) || super.onOptionsItemSelected(item)
+        val navController = view!!.findNavController()
+        when (item.itemId) {
+            R.id.loginFragment -> navController.popBackStack(R.id.loginFragment, false)
+        }
+
+        return NavigationUI.onNavDestinationSelected(item!!, navController) || super.onOptionsItemSelected(item)
     }
 }

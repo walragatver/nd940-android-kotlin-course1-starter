@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
+import com.udacity.shoestore.databinding.ShoeInfoItemBinding
 import kotlinx.android.synthetic.main.shoe_info_item.*
 
 
@@ -29,19 +30,12 @@ class ShoeList : Fragment() {
             newList ->
             val shoeListContainer =  binding.verticalShoeListLayout
             for (i in newList.indices) {
-                val to_add: View = inflater.inflate(
-                    R.layout.shoe_info_item,
-                    shoeListContainer, false
-                )
+                val shoeItemBinding: ShoeInfoItemBinding = DataBindingUtil.inflate(inflater, R.layout.shoe_info_item, null, false)
+                shoeItemBinding.shoeDescription.text = newList[i].description
+                shoeItemBinding.shoeName.text = "${newList[i].companyName}: ${newList[i].shoeName}"
+                shoeItemBinding.sizeInfoText.text = "Size: ${newList[i].shoeSize}"
 
-                val descriptionTextView = to_add.findViewById<View>(R.id.shoeDescription) as TextView
-                val shoeNameView = to_add.findViewById<View>(R.id.shoeName) as TextView
-                val shoeSizeView = to_add.findViewById<View>(R.id.sizeInfoText) as TextView
-                descriptionTextView.text = newList[i].description
-                shoeNameView.text = "${newList[i].companyName}: ${newList[i].shoeName}"
-                shoeSizeView.text = "Size: ${newList[i].shoeSize}"
-
-                shoeListContainer.addView(to_add)
+                shoeListContainer.addView(shoeItemBinding.root)
             }
         })
 
@@ -56,6 +50,12 @@ class ShoeList : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController()) || super.onOptionsItemSelected(item)
+        val navController = view!!.findNavController()
+
+        when (item.itemId) {
+            R.id.loginFragment -> navController.popBackStack(R.id.loginFragment, false)
+        }
+
+        return NavigationUI.onNavDestinationSelected(item!!, navController) || super.onOptionsItemSelected(item)
     }
 }

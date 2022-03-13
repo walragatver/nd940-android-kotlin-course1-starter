@@ -7,14 +7,17 @@
 
     </data>
 
+    <!--  ConstraintLayout to position FAB at bottom and on top of ScrollView. Also to ensure single child for layout tag  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <!-- Ensure user is able to see all items on the screen by scrolling down -->
     <ScrollView
         android:id="@+id/scrollableView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/scrollview_content_description">
+        <!-- Align all shoe items vertically one below another -->
         <LinearLayout
             android:id="@+id/verticalShoeListLayout"
             android:layout_width="match_parent"
@@ -22,18 +25,18 @@
             android:orientation="vertical" />
     </ScrollView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="Add a shoe"
-            android:src="@drawable/ic_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Add a shoe"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
