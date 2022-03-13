@@ -50,6 +50,7 @@
         tools:layout="@layout/fragment_edit_shoe_detail">
         <action
             android:id="@+id/action_editShoeDetail_to_shoeList"
-            app:destination="@id/shoeList" />
+            app:destination="@id/shoeList"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
 </navigation>

@@ -27,21 +27,6 @@ class WelcomeFragment : Fragment() {
             view ->
                 view.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToInstructionFragment())
         }
-        setHasOptionsMenu(true)
         return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.overflow_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = view!!.findNavController()
-        when (item.itemId) {
-            R.id.loginFragment -> navController.popBackStack(R.id.loginFragment, false)
-        }
-
-        return NavigationUI.onNavDestinationSelected(item!!, navController) || super.onOptionsItemSelected(item)
     }
 }
