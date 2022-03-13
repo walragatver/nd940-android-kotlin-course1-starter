@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.udacity.shoestore.databinding.FragmentEditShoeDetailBinding
-import com.udacity.shoestore.shoelist.ShoeInfo
-import com.udacity.shoestore.shoelist.ShoeInfoModelFactory
 import com.udacity.shoestore.shoelist.ShoeListModel
 
 
@@ -22,7 +19,6 @@ import com.udacity.shoestore.shoelist.ShoeListModel
  */
 class EditShoeDetail : Fragment() {
     val shoeListModel: ShoeListModel by activityViewModels()
-    private lateinit var viewModel: ShoeInfo
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,14 +26,16 @@ class EditShoeDetail : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding: FragmentEditShoeDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_shoe_detail, container, false)
-        val viewModelFactory = ShoeInfoModelFactory("", "", "", "")
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ShoeInfo::class.java)
-        binding.newShoeInfo = viewModel
 
         binding.cancelButton.setOnClickListener { view -> view.findNavController().navigate(EditShoeDetailDirections.actionEditShoeDetailToShoeList()) }
         binding.addShoeButton.setOnClickListener {
             view ->
-                shoeListModel.addShoe(viewModel);
+                val shoeName = binding.shoeNameTextInput.text.toString()
+                val companyName = binding.companyNameTextInput.text.toString()
+                val sizeInput: Int = binding.shoeSizeInput.text.toString().toIntOrNull() ?: 10
+                val shoeDescription: String = binding.shoeDescriptionInput.text.toString()
+                val newShoeInfo: ShoeListModel.ShoeInfo = ShoeListModel.ShoeInfo(shoeName, companyName, sizeInput, shoeDescription)
+                shoeListModel.addShoe(newShoeInfo);
                 view.findNavController().navigate(EditShoeDetailDirections.actionEditShoeDetailToShoeList());
         }
         return binding.root
