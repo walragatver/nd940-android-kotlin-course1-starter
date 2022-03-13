@@ -31,9 +31,9 @@ class ShoeList : Fragment() {
             val shoeListContainer =  binding.verticalShoeListLayout
             for (i in newList.indices) {
                 val shoeItemBinding: ShoeInfoItemBinding = DataBindingUtil.inflate(inflater, R.layout.shoe_info_item, null, false)
-                shoeItemBinding.shoeDescription.text = newList[i].description
-                shoeItemBinding.shoeName.text = "${newList[i].companyName}: ${newList[i].shoeName}"
-                shoeItemBinding.sizeInfoText.text = "Size: ${newList[i].shoeSize}"
+                shoeItemBinding.shoeDescription.text = newList[i].getDescriptionVal()
+                shoeItemBinding.shoeName.text = "${newList[i].getCompanyNameVal()}: ${newList[i].getShoeNameVal()}"
+                shoeItemBinding.sizeInfoText.text = "Size: ${newList[i].getShoeSizeVal()}"
 
                 shoeListContainer.addView(shoeItemBinding.root)
             }
